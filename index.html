@@ -26,7 +26,7 @@ header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid 
 .logo span{color:var(--accent2);}
 nav a{margin-left:18px;color:#333;text-decoration:none;}
 nav a:hover{color:var(--accent);}
-.lang-switch{margin-left:20px;}
+.lang-switch{margin-left:20px;padding:6px 8px;border-radius:6px;border:1px solid #ccc;}
 .hero{padding:60px 0;border-bottom:1px solid #eee;}
 .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:0 20px;}
 .hero-copy h1{font-size:38px;margin-bottom:12px;}
@@ -42,21 +42,33 @@ nav a:hover{color:var(--accent);}
 .site-footer{padding:30px 0;text-align:center;border-top:1px solid #eee;color:#555;}
 .timeline{margin:0;padding-left:18px;}
 .grid-2{display:grid;grid-template-columns:2fr 1fr;gap:28px;align-items:start;padding:0 20px;}
-.sidebar-card{text-align:center;padding:20px;border:1px solid #e8e8ef;border-radius:16px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.06);}
-.sidebar-card .avatar{width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 8px 26px rgba(0,0,0,.12);margin-bottom:12px;}
-.sidebar-name{font-weight:700;margin:4px 0 2px 0;}
-.sidebar-sub{font-size:13px;color:#667085}
-.stat-row{display:flex;justify-content:center;gap:14px;margin:10px 0 2px}
-.stat-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#f3f5ff;border:1px solid #e6e8ff;font-size:13px;color:#2b2f36}
-.sidebar-actions{display:flex;gap:10px;justify-content:center;margin-top:10px}
 .board-wrap{max-width:760px;margin:0 auto;padding:0 20px;}
 .comment-input{width:100%;min-height:96px;border-radius:12px;border:1px solid #dcdde1;padding:12px;font-family:inherit;resize:vertical;}
 .comment-toolbar{display:flex;gap:10px;margin-top:10px;align-items:center}
 .comment-list{margin-top:18px}
 .comment-item{background:#fafbff;border:1px solid #e8e8ef;border-radius:12px;padding:12px;margin-top:10px}
 .comment-meta{font-size:12px;color:#667085;margin-bottom:6px}
+
+/* 头像悬浮卡片 */
+.sidebar-card{
+  position:fixed;
+  top:90px; right:20px;
+  width:220px;
+  text-align:center;padding:20px;border:1px solid #e8e8ef;border-radius:16px;
+  background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.1);
+}
+.sidebar-card .avatar{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 8px 26px rgba(0,0,0,.12);margin-bottom:12px;}
+.sidebar-name{font-weight:700;margin:4px 0 2px 0;}
+.sidebar-sub{font-size:13px;color:#667085}
+.stat-row{display:flex;justify-content:center;gap:14px;margin:10px 0 2px}
+.stat-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#f3f5ff;border:1px solid #e6e8ff;font-size:13px;color:#2b2f36}
+.sidebar-actions{display:flex;gap:10px;justify-content:center;margin-top:10px}
+
 html{scroll-behavior:smooth}
-@media (max-width:960px){.grid-2{grid-template-columns:1fr}}
+@media (max-width:960px){
+  .sidebar-card{position:relative;top:0;right:0;width:auto;margin:12px;}
+  .grid-2{grid-template-columns:1fr}
+}
 </style>
 </head>
 
@@ -65,9 +77,14 @@ html{scroll-behavior:smooth}
   <div class="container nav">
     <a class="logo" href="#">JAE<span>·DEV</span></a>
     <nav>
-      <a href="#about">关于我</a>
-      <a href="#projects">项目</a>
-      <a href="#contact">联系</a>
+      <a href="#about" data-key="nav_about">关于我</a>
+      <a href="#projects" data-key="nav_projects">项目</a>
+      <a href="#contact" data-key="nav_contact">联系</a>
+      <select id="langSelect" class="lang-switch">
+        <option value="zh">中文</option>
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+      </select>
     </nav>
   </div>
 </header>
@@ -75,61 +92,58 @@ html{scroll-behavior:smooth}
 <section class="hero">
   <div class="container hero-inner">
     <div class="hero-copy">
-      <h1>你好，我是 <span class="accent">Jae</span> —— 软件工程师 / 中韩翻译专家</h1>
-      <p>专注于 AI 工具、游戏、音视频与电商系统的独立开发者，同时从事中韩双语翻译与本地化工作。</p>
+      <h1 data-key="hero_title">你好，我是 <span class="accent">Jae</span> —— 软件工程师 / 中韩翻译专家</h1>
+      <p data-key="hero_desc">专注于 AI 工具、游戏、音视频与电商系统的独立开发者，同时从事中韩双语翻译与本地化工作。</p>
       <div class="hero-cta">
-        <a class="btn primary" href="#projects">查看项目</a>
-        <a class="btn" href="#about">了解我</a>
+        <a class="btn primary" href="#projects" data-key="hero_view_projects">查看项目</a>
+        <a class="btn" href="#about" data-key="hero_about_me">了解我</a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- 悬浮头像模块（右上角） -->
+<div class="sidebar-card">
+  <img class="avatar" src="assets/img/avatar.png" alt="avatar">
+  <div class="sidebar-name">Jae Ahn</div>
+  <div class="sidebar-sub" data-key="sidebar_sub">独立开发者 · 中韩翻译专家</div>
+  <div class="stat-row">
+    <div class="stat-pill">👍 <span id="likeCount">0</span></div>
+    <div class="stat-pill">💬 <span id="commentCount">0</span></div>
+  </div>
+  <div class="sidebar-actions">
+    <button class="btn" onclick="addLike()" data-key="btn_like">点赞</button>
+    <button class="btn" onclick="document.getElementById('board').scrollIntoView({behavior:'smooth'})" data-key="btn_comment">留言</button>
+  </div>
+</div>
+
 <section id="about" class="section">
   <div class="container grid-2">
     <div>
-      <h2>关于我</h2>
-      <p>· 现居首尔，热爱将创意快速落地。<br>· 软件工程师与中韩翻译专家。<br>· 偏好 Python / Django / Flask / Unity / 多语言系统开发。<br>· 关注低成本、跨平台与高效开发。</p>
+      <h2 data-key="about_title">关于我</h2>
+      <p data-key="about_desc">· 现居首尔，热爱将创意快速落地。<br>· 软件工程师与中韩翻译专家。<br>· 偏好 Python / Django / Flask / Unity / 多语言系统开发。<br>· 关注低成本、跨平台与高效开发。</p>
 
       <aside class="card" style="margin-top:16px">
-        <h3>工作经历（摘要）</h3>
+        <h3 data-key="career_title">工作经历（摘要）</h3>
         <ul class="timeline">
           <li><b>2025 — 现在</b> 独立开发者 · 全栈/AI/中韩翻译</li>
           <li><b>2023 — 2024</b> 学生项目 · 语音/图像/游戏</li>
         </ul>
       </aside>
     </div>
-
-    <div>
-      <div class="sidebar-card">
-        <img class="avatar" src="assets/img/avatar.png" alt="avatar">
-        <div class="sidebar-name">Jae Ahn</div>
-        <div class="sidebar-sub">独立开发者 · 中韩翻译专家</div>
-
-        <div class="stat-row">
-          <div class="stat-pill">👍 <span id="likeCount">0</span></div>
-          <div class="stat-pill">💬 <span id="commentCount">0</span></div>
-        </div>
-
-        <div class="sidebar-actions">
-          <button class="btn" onclick="addLike()">点赞</button>
-          <button class="btn" onclick="document.getElementById('board').scrollIntoView({behavior:'smooth'})">留言</button>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
 <section id="projects" class="section">
   <div class="container">
-    <h2 style="padding:0 20px">定制项目</h2>
+    <h2 style="padding:0 20px" data-key="projects_title">定制项目</h2>
     <div class="cards">
       <article class="card project">
         <div class="card-badge">POS</div>
         <h3>TreasurePOS 收银系统</h3>
-        <p>一款本地运行的轻量级 POS 收银管理系统，支持发票打印、库存管理与多语言界面。</p>
+        <p data-key="projects_desc">一款本地运行的轻量级 POS 收银管理系统，支持发票打印、库存管理与多语言界面。</p>
         <div class="actions">
-          <a class="btn primary" href="https://github.com/AHN2001hanyang/TreasurePOS" target="_blank" rel="noopener noreferrer">进入 GitHub 查看项目</a>
+          <a class="btn primary" href="https://github.com/AHN2001hanyang/TreasurePOS" target="_blank" rel="noopener noreferrer" data-key="projects_btn">进入 GitHub 查看项目</a>
         </div>
       </article>
     </div>
@@ -138,20 +152,20 @@ html{scroll-behavior:smooth}
 
 <section id="board" class="section">
   <div class="board-wrap">
-    <h2>网站留言板</h2>
+    <h2 data-key="board_title">网站留言板</h2>
     <textarea id="commentInput" class="comment-input" placeholder="写下你的建议..."></textarea>
     <div class="comment-toolbar">
-      <button class="btn primary" onclick="submitComment()">提交留言</button>
-      <span style="color:#667085;font-size:13px">💡 评论将保存到 MongoDB</span>
+      <button class="btn primary" onclick="submitComment()" data-key="btn_submit_comment">提交留言</button>
+      <span style="color:#667085;font-size:13px" data-key="comment_hint">💡 评论将保存到 MongoDB</span>
     </div>
     <div id="commentList" class="comment-list"></div>
   </div>
 </section>
 
 <section id="contact" class="section" style="text-align:center;">
-  <h2>联系我</h2>
+  <h2 data-key="contact_title">联系我</h2>
   <p>邮箱: <a href="mailto:jaehyung9483@gmail.com">jaehyung9483@gmail.com</a></p>
-  <button class="btn primary" onclick="window.location='mailto:jaehyung9483@gmail.com'">发送邮件</button>
+  <button class="btn primary" onclick="window.location='mailto:jaehyung9483@gmail.com'" data-key="contact_btn">发送邮件</button>
 </section>
 
 <footer class="site-footer">
@@ -162,69 +176,159 @@ html{scroll-behavior:smooth}
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-
 const API_BASE = "https://myproject-iota-bay.vercel.app/api";
 
-// --- 加载点赞 ---
+/* ------- 点赞 / 评论 ------- */
 async function loadLikes(){
   try{
     const res = await fetch(`${API_BASE}/like`);
     const data = await res.json();
     document.getElementById("likeCount").textContent = data.count ?? 0;
-  }catch(e){
-    console.error("加载点赞失败", e);
-  }
+  }catch(e){ console.error("加载点赞失败", e); }
 }
-
-// --- 点赞按钮 ---
 async function addLike(){
   try{
     await fetch(`${API_BASE}/like`, { method: "POST" });
     loadLikes();
-  }catch(e){
-    console.error("点赞失败", e);
-  }
+  }catch(e){ console.error("点赞失败", e); }
 }
-
-// --- 加载评论 ---
 async function loadComments(){
   try{
     const res = await fetch(`${API_BASE}/comments`);
     const comments = await res.json();
     document.getElementById("commentCount").textContent = comments.length;
-    const list = document.getElementById("commentList");
-    list.innerHTML = comments.map((c,i)=>`
+    document.getElementById("commentList").innerHTML = comments.map((c,i)=>`
       <div class="comment-item">
         <div class="comment-meta">#${i+1} · ${new Date(c.t).toLocaleString()}</div>
         <div>${String(c.text).replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
       </div>
     `).join('');
-  }catch(e){
-    console.error("加载评论失败", e);
-  }
+  }catch(e){ console.error("加载评论失败", e); }
 }
-
-// --- 提交评论 ---
 async function submitComment(){
-  const ta = document.getElementById("commentInput");
-  const text = (ta?.value || "").trim();
-  if(!text) return alert("请输入评论内容");
+  const text = document.getElementById("commentInput").value.trim();
+  if(!text) return alert(getI18n("comment_placeholder_alert"));
   try{
     await fetch(`${API_BASE}/comments`, {
       method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ text })
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({text})
     });
-    if (ta) ta.value = "";
+    document.getElementById("commentInput").value="";
     loadComments();
-  }catch(e){
-    alert("提交失败，请检查服务器是否运行");
-  }
+  }catch(e){ alert(getI18n("comment_submit_failed")); }
 }
 
-// --- 初始化 ---
-loadLikes();
-loadComments();
+/* ------- 多语言 ------- */
+const dict = {
+  zh: {
+    nav_about:"关于我", nav_projects:"项目", nav_contact:"联系",
+    hero_title:"你好，我是 <span class='accent'>Jae</span> —— 软件工程师 / 中韩翻译专家",
+    hero_desc:"专注于 AI 工具、游戏、音视频与电商系统的独立开发者，同时从事中韩双语翻译与本地化工作。",
+    hero_view_projects:"查看项目", hero_about_me:"了解我",
+    sidebar_sub:"独立开发者 · 中韩翻译专家", btn_like:"点赞", btn_comment:"留言",
+    about_title:"关于我",
+    about_desc:"· 现居首尔，热爱将创意快速落地。<br>· 软件工程师与中韩翻译专家。<br>· 偏好 Python / Django / Flask / Unity / 多语言系统开发。<br>· 关注低成本、跨平台与高效开发。",
+    career_title:"工作经历（摘要）", projects_title:"定制项目",
+    projects_desc:"一款本地运行的轻量级 POS 收银管理系统，支持发票打印、库存管理与多语言界面。",
+    projects_btn:"进入 GitHub 查看项目", board_title:"网站留言板",
+    btn_submit_comment:"提交留言", comment_hint:"💡 评论将保存到 MongoDB",
+    contact_title:"联系我", contact_btn:"发送邮件",
+    comment_placeholder_alert:"请输入评论内容",
+    comment_submit_failed:"提交失败，请检查服务器是否运行"
+  },
+  ko: {
+    nav_about:"소개", nav_projects:"프로젝트", nav_contact:"연락",
+    hero_title:"안녕하세요, <span class='accent'>Jae</span> 입니다 — 소프트웨어 엔지니어 / 중한 번역 전문가",
+    hero_desc:"AI 도구, 게임, 오디오·비디오 및 전자상거래 시스템에 집중하는 독립 개발자이며, 중한 번역 및 로컬라이제이션 업무를 수행합니다.",
+    hero_view_projects:"프로젝트 보기", hero_about_me:"소개 보기",
+    sidebar_sub:"독립 개발자 · 중한 번역 전문가", btn_like:"좋아요", btn_comment:"댓글",
+    about_title:"소개",
+    about_desc:"· 서울 거주, 아이디어를 빠르게 실현하는 것을 좋아합니다.<br>· 소프트웨어 엔지니어 및 중한 번역 전문가입니다.<br>· Python / Django / Flask / Unity / 다국어 시스템 개발 선호.<br>· 저비용, 크로스플랫폼, 효율적 개발에 집중합니다.",
+    career_title:"경력 요약", projects_title:"맞춤형 프로젝트",
+    projects_desc:"로컬에서 실행되는 경량 POS 시스템으로 영수증 인쇄, 재고 관리, 다국어 UI를 지원합니다.",
+    projects_btn:"GitHub에서 보기", board_title:"방명록",
+    btn_submit_comment:"댓글 제출", comment_hint:"💡 댓글은 MongoDB에 저장됩니다.",
+    contact_title:"연락하기", contact_btn:"이메일 보내기",
+    comment_placeholder_alert:"댓글 내용을 입력해 주세요.",
+    comment_submit_failed:"제출 실패, 서버 상태를 확인해 주세요."
+  },
+  en: {
+    nav_about:"About", nav_projects:"Projects", nav_contact:"Contact",
+    hero_title:"Hi, I'm <span class='accent'>Jae</span> — Software Engineer / KR-CN Translator",
+    hero_desc:"An indie developer focused on AI tools, games, audio/video, and e-commerce systems; also a KR-CN localization specialist.",
+    hero_view_projects:"View Projects", hero_about_me:"About Me",
+    sidebar_sub:"Indie Developer · KR-CN Translator", btn_like:"Like", btn_comment:"Comment",
+    about_title:"About Me",
+    about_desc:"· Based in Seoul, passionate about rapid prototyping.<br>· Software Engineer & KR-CN Translator.<br>· Prefer Python / Django / Flask / Unity / multilingual systems.<br>· Focused on low-cost, efficient cross-platform development.",
+    career_title:"Career Summary", projects_title:"Custom Projects",
+    projects_desc:"A lightweight local POS system supporting receipt printing, inventory, and multilingual UI.",
+    projects_btn:"View on GitHub", board_title:"Guestbook",
+    btn_submit_comment:"Submit Comment", comment_hint:"💡 Comments are saved to MongoDB",
+    contact_title:"Contact Me", contact_btn:"Send Email",
+    comment_placeholder_alert:"Please enter your comment.",
+    comment_submit_failed:"Submit failed. Please check server status."
+  }
+};
+
+function applyLang(lang){
+  // 保存偏好
+  localStorage.setItem("lang", lang);
+  // 设置下拉值
+  const sel = document.getElementById("langSelect");
+  if (sel) sel.value = lang;
+
+  // 文案替换
+  const map = dict[lang] || dict.en;
+  document.querySelectorAll("[data-key]").forEach(el=>{
+    const key = el.getAttribute("data-key");
+    if (map[key]) el.innerHTML = map[key];
+  });
+
+  // 占位符本地化
+  const ta = document.getElementById("commentInput");
+  if (ta){
+    ta.placeholder = {
+      zh:"写下你的建议...",
+      ko:"의견을 남겨주세요...",
+      en:"Write your suggestion..."
+    }[lang] || "Write your suggestion...";
+  }
+
+  // <html lang="..">
+  document.documentElement.setAttribute("lang", lang === "ko" ? "ko" : (lang === "en" ? "en" : "zh-CN"));
+}
+
+function detectInitialLang(){
+  // 1) 用户偏好优先
+  const saved = localStorage.getItem("lang");
+  if (saved) return saved;
+
+  // 2) 浏览器语言
+  const nav = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+  if (nav.startsWith("zh")) return "zh";
+  if (nav.startsWith("ko")) return "ko";
+  return "en";
+}
+
+// 手动切换
+document.getElementById("langSelect").addEventListener("change", e=>{
+  applyLang(e.target.value);
+});
+
+// 获取 i18n 字符串（用于 alert）
+function getI18n(key){
+  const lang = localStorage.getItem("lang") || detectInitialLang();
+  return (dict[lang] && dict[lang][key]) || (dict.en && dict.en[key]) || "";
+}
+
+/* ------- 初始化 ------- */
+(function init(){
+  const lang = detectInitialLang();
+  applyLang(lang);
+  loadLikes();
+  loadComments();
+})();
 </script>
 
 </body>
