@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>主页 · Jae Ahn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#ffffff; --card:#ffffff; --muted:#555;
+  --text:#111; --accent:#2962ff; --accent2:#7c4dff;
+  --ring: rgba(41,98,255,.25);
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  margin:0;padding:0;
+}
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eee;}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 20px;}
+.logo{font-weight:800;font-size:20px;color:var(--accent);}
+.logo span{color:var(--accent2);}
+nav a{margin-left:18px;color:#333;text-decoration:none;}
+nav a:hover{color:var(--accent);}
+.lang-switch{margin-left:20px;}
+.hero{padding:60px 0;border-bottom:1px solid #eee;}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:0 20px;}
+.hero-copy h1{font-size:38px;margin-bottom:12px;}
+.hero-copy p{color:#444;line-height:1.6;}
+.btn{padding:10px 16px;border-radius:12px;border:1px solid #dcdde1;background:#fff;color:#111;cursor:pointer;transition:.2s;}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.06)}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:#fff;}
+.section{padding:48px 0;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;padding:0 20px;}
+.card{background:var(--card);border:1px solid #e8e8ef;border-radius:16px;padding:16px;box-shadow:0 6px 20px rgba(0,0,0,.06);}
+.card-badge{display:inline-block;padding:4px 8px;background:rgba(41,98,255,.12);border-radius:999px;margin-bottom:8px;font-size:13px;color:#2b2f36;}
+.actions{display:flex;gap:10px;margin-top:8px;}
+.site-footer{padding:30px 0;text-align:center;border-top:1px solid #eee;color:#555;}
+.timeline{margin:0;padding-left:18px;}
+.grid-2{display:grid;grid-template-columns:2fr 1fr;gap:28px;align-items:start;padding:0 20px;}
+.sidebar-card{text-align:center;padding:20px;border:1px solid #e8e8ef;border-radius:16px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.06);}
+.sidebar-card .avatar{width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 8px 26px rgba(0,0,0,.12);margin-bottom:12px;}
+.sidebar-name{font-weight:700;margin:4px 0 2px 0;}
+.sidebar-sub{font-size:13px;color:#667085}
+.stat-row{display:flex;justify-content:center;gap:14px;margin:10px 0 2px}
+.stat-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#f3f5ff;border:1px solid #e6e8ff;font-size:13px;color:#2b2f36}
+.sidebar-actions{display:flex;gap:10px;justify-content:center;margin-top:10px}
+.board-wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+.comment-input{width:100%;min-height:96px;border-radius:12px;border:1px solid #dcdde1;padding:12px;font-family:inherit;resize:vertical;}
+.comment-toolbar{display:flex;gap:10px;margin-top:10px;align-items:center}
+.comment-list{margin-top:18px}
+.comment-item{background:#fafbff;border:1px solid #e8e8ef;border-radius:12px;padding:12px;margin-top:10px}
+.comment-meta{font-size:12px;color:#667085;margin-bottom:6px}
+html{scroll-behavior:smooth}
+@media (max-width:960px){.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="logo" href="#">JAE<span>·DEV</span></a>
+    <nav>
+      <a href="#about">关于我</a>
+      <a href="#projects">项目</a>
+      <a href="#contact">联系</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h1>你好，我是 <span class="accent">Jae</span> —— 软件工程师 / 中韩翻译专家</h1>
+      <p>专注于 AI 工具、游戏、音视频与电商系统的独立开发者，同时从事中韩双语翻译与本地化工作。</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#projects">查看项目</a>
+        <a class="btn" href="#about">了解我</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="container grid-2">
+    <div>
+      <h2>关于我</h2>
+      <p>· 现居首尔，热爱将创意快速落地。<br>· 软件工程师与中韩翻译专家。<br>· 偏好 Python / Django / Flask / Unity / 多语言系统开发。<br>· 关注低成本、跨平台与高效开发。</p>
+
+      <aside class="card" style="margin-top:16px">
+        <h3>工作经历（摘要）</h3>
+        <ul class="timeline">
+          <li><b>2025 — 现在</b> 独立开发者 · 全栈/AI/中韩翻译</li>
+          <li><b>2023 — 2024</b> 学生项目 · 语音/图像/游戏</li>
+        </ul>
+      </aside>
+    </div>
+
+    <div>
+      <div class="sidebar-card">
+        <img class="avatar" src="assets/img/avatar.png" alt="avatar">
+        <div class="sidebar-name">Jae Ahn</div>
+        <div class="sidebar-sub">独立开发者 · 中韩翻译专家</div>
+
+        <div class="stat-row">
+          <div class="stat-pill">👍 <span id="likeCount">0</span></div>
+          <div class="stat-pill">💬 <span id="commentCount">0</span></div>
+        </div>
+
+        <div class="sidebar-actions">
+          <button class="btn" onclick="addLike()">点赞</button>
+          <button class="btn" onclick="document.getElementById('board').scrollIntoView({behavior:'smooth'})">留言</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <div class="container">
+    <h2 style="padding:0 20px">定制项目</h2>
+    <div class="cards">
+      <article class="card project">
+        <div class="card-badge">POS</div>
+        <h3>TreasurePOS 收银系统</h3>
+        <p>一款本地运行的轻量级 POS 收银管理系统，支持发票打印、库存管理与多语言界面。</p>
+        <div class="actions">
+          <a class="btn primary" href="https://github.com/AHN2001hanyang/TreasurePOS" target="_blank" rel="noopener noreferrer">进入 GitHub 查看项目</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="board" class="section">
+  <div class="board-wrap">
+    <h2>网站留言板</h2>
+    <textarea id="commentInput" class="comment-input" placeholder="写下你的建议..."></textarea>
+    <div class="comment-toolbar">
+      <button class="btn primary" onclick="submitComment()">提交留言</button>
+      <span style="color:#667085;font-size:13px">💡 评论将保存到 MongoDB</span>
+    </div>
+    <div id="commentList" class="comment-list"></div>
+  </div>
+</section>
+
+<section id="contact" class="section" style="text-align:center;">
+  <h2>联系我</h2>
+  <p>邮箱: <a href="mailto:jaehyung9483@gmail.com">jaehyung9483@gmail.com</a></p>
+  <button class="btn primary" onclick="window.location='mailto:jaehyung9483@gmail.com'">发送邮件</button>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© <span id="year"></span> Jae Ahn · HTML/CSS/JS 构建 · MongoDB Atlas 支持</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const API_BASE = "https://myproject-iota-bay.vercel.app/api";
+
+// --- 加载点赞 ---
+async function loadLikes(){
+  try{
+    const res = await fetch(`${API_BASE}/like`);
+    const data = await res.json();
+    document.getElementById("likeCount").textContent = data.count ?? 0;
+  }catch(e){
+    console.error("加载点赞失败", e);
+  }
+}
+
+// --- 点赞按钮 ---
+async function addLike(){
+  try{
+    await fetch(`${API_BASE}/like`, { method: "POST" });
+    loadLikes();
+  }catch(e){
+    console.error("点赞失败", e);
+  }
+}
+
+// --- 加载评论 ---
+async function loadComments(){
+  try{
+    const res = await fetch(`${API_BASE}/comments`);
+    const comments = await res.json();
+    document.getElementById("commentCount").textContent = comments.length;
+    const list = document.getElementById("commentList");
+    list.innerHTML = comments.map((c,i)=>`
+      <div class="comment-item">
+        <div class="comment-meta">#${i+1} · ${new Date(c.t).toLocaleString()}</div>
+        <div>${String(c.text).replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+      </div>
+    `).join('');
+  }catch(e){
+    console.error("加载评论失败", e);
+  }
+}
+
+// --- 提交评论 ---
+async function submitComment(){
+  const ta = document.getElementById("commentInput");
+  const text = (ta?.value || "").trim();
+  if(!text) return alert("请输入评论内容");
+  try{
+    await fetch(`${API_BASE}/comments`, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ text })
+    });
+    if (ta) ta.value = "";
+    loadComments();
+  }catch(e){
+    alert("提交失败，请检查服务器是否运行");
+  }
+}
+
+// --- 初始化 ---
+loadLikes();
+loadComments();
+</script>
+
+</body>
+</html>
